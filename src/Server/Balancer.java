@@ -1,5 +1,7 @@
 package Server;
 
+import Impl.Binder;
+import Impl.BinderImpl;
 import Impl.Calculator;
 import Impl.CalculatorImpl;
 
@@ -7,6 +9,7 @@ import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -23,13 +26,15 @@ public class Balancer implements Main{
 	private ArrayList<CalculatorImpl> localserver;
 	private int regport;
 	private int bindport;
+	private int binderport;
 	private int serverport;
 	private String name;
 	private int createport;
 	public static void main(String [] args){
 		int regport = 0;
-		int bindport = 0;
+		int binderport = 0;
 		int serverport = 0;
+		int bindport = 0;
 		String name = "";
 		boolean a = true;
 		if(args.length > 0)
@@ -38,16 +43,21 @@ public class Balancer implements Main{
                 regport = 1099;
                 bindport = 1234;
                 serverport = 4567;
+                binderport = 2345;
                 name = "Pi";
             }else if ( args.length> 1){
             	try{
 	        		a = false;
 	        		name = args[0];
 	        		regport = Integer.parseInt(args[1]);
-	        		bindport = Integer.parseInt(args[2]);
-	        		serverport = Integer.parseInt(args[3]);
+	        		binderport = Integer.parseInt(args[2]);
+	        		bindport =Integer.parseInt(args[3]);
+	        		serverport = Integer.parseInt(args[4]);
             	}catch(NumberFormatException e){
             		System.out.println("Bitte beachten das die Ports Zahlen sein müssen!");
+            		System.exit(0);
+            	}catch(IndexOutOfBoundsException e){
+            		System.out.println("Bitte beachten sie die richtige Anzahl con Parametern!");
             		System.exit(0);
             	}
             }
@@ -55,18 +65,19 @@ public class Balancer implements Main{
 			System.out.println("Bitte folgende Syntax verwenden:");
 			System.out.println("d für die default werte!");
 			System.out.println("oder");
-			System.out.println("<name> <Registry Port für Service> <Service Port> <Registry Ports für Server>");
+			System.out.println("<name> <Registry Port für Service> <Service Port> <port zum einbinden von externen Servern> <Registry Ports für Server>");
 		}else{
 			try {
-				new Balancer(regport, bindport, serverport, name);
+				new Balancer(regport,bindport, binderport, serverport, name);
 			} catch (RemoteException | MalformedURLException e) {
 				System.err.println("Das Programm wurde aufgrund eines Verbindungsfehlers beendet");
 				System.exit(0);
 			}
 		}
 	}
-	private Balancer(int regport,int bindport,int serverport, String name) throws RemoteException, MalformedURLException{
+	private Balancer(int regport,int bindport,int binderport,int serverport, String name) throws RemoteException, MalformedURLException{
 		this.regport = regport;
+		this.binderport = binderport;
 		this.bindport = bindport;
 		this.serverport = serverport;
 		this.name = name;
@@ -83,13 +94,19 @@ public class Balancer implements Main{
 		o.println("Balancer algoritmus wird geladen....");
 		Calculator ci = new CalculatorBalancer(server);
 		Calculator stup = (Calculator) UnicastRemoteObject.exportObject(ci,bindport);
+		Binder bb = new BinderImpl(this);
+		Binder bstup = (Binder) UnicastRemoteObject.exportObject(bb,binderport);
 		o.println("Balancer algoritmus wurde geladen!");
 		o.println("Service wird angeboten.....");
+		reg.rebind("Binder",bstup);
 		reg.rebind(name, stup);
 		o.println("Service wurde gebunden!");
 		try {
 			creatsr("1");
 		} catch (AlreadyBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -115,6 +132,9 @@ public class Balancer implements Main{
 				} catch (AlreadyBoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (NotBoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			else
 				o.println("Bitte die anzahl zu erstellenden Server angeben!");
@@ -138,7 +158,7 @@ public class Balancer implements Main{
 		for(int i = 0; i < ar.length;i++)
 			o.println(ar[i]);
 	}
-	public void creatsr(String anz) throws AccessException, RemoteException, AlreadyBoundException{
+	public void creatsr(String anz) throws AccessException, RemoteException, AlreadyBoundException, NotBoundException{
 		int an=0;
 		ArrayList<String> ar = new ArrayList<String>(Arrays.asList(server.list()));  
 		//String[] ar = server.list();
@@ -149,7 +169,7 @@ public class Balancer implements Main{
 				String s = "Server";
 				for(int ii = 0; ar.contains(s);ii++)
 					s = "Server " + ii;
-				localserver.add(new CalculatorImpl(serverport,createport,s,"127.0.0.1",false));
+				localserver.add(new CalculatorImpl(regport,createport,s,"127.0.0.1",false));
 				createport ++;
 				ar = new ArrayList<String>(Arrays.asList(server.list()));
 			}
@@ -161,5 +181,8 @@ public class Balancer implements Main{
 	public void stop(){
 		in.stop();
 		System.exit(0);
+	}
+	public Registry getServer(){
+		return this.server;
 	}
 }

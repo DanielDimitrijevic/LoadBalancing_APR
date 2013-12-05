@@ -13,13 +13,14 @@ public class CalculatorImpl implements Calculator ,Main{
 	private String name;
 	private UI in;
 	private Registry reg;
-    public CalculatorImpl (int regport,int bindport, String name, String reghost,boolean gui)throws RemoteException, AlreadyBoundException{
+    public CalculatorImpl (int regport,int bindport, String name, String reghost,boolean gui)throws RemoteException, AlreadyBoundException, NotBoundException{
     	this.name = name;
     	if(System.getSecurityManager() == null)
 			System.setSecurityManager(new SecurityManager());
     	reg = LocateRegistry.getRegistry(reghost, regport);
-    	Calculator stup = (Calculator) UnicastRemoteObject.exportObject(this,bindport);
-    	reg.bind(name, stup);
+    	Binder c =
+                (Binder)reg.lookup ("Binder");
+    	c.bind(name,bindport,this);
     	System.out.println("Verbunden");
     	if(gui){
     		in = new UI(this);
@@ -48,6 +49,7 @@ public class CalculatorImpl implements Calculator ,Main{
     public static void main(String[] args){
     	int regport = 0;
 		int bindport = 0;
+		int binderport = 0;
 		String host = "";
 		String name = "";
 		boolean a = true;
@@ -56,6 +58,7 @@ public class CalculatorImpl implements Calculator ,Main{
             	a=false;
                 regport = 4567;
                 bindport = 7895;
+                binderport = 2345;
                 host = "127.0.0.1";
                 name = "Pi";
             }else if ( args.length> 1){
@@ -67,6 +70,9 @@ public class CalculatorImpl implements Calculator ,Main{
 	        		bindport = Integer.parseInt(args[3]);
             	}catch(NumberFormatException e){
             		System.out.println("Bitte beachten das die Ports Zahlen sein müssen!");
+            		System.exit(0);
+            	}catch(IndexOutOfBoundsException e){
+            		System.out.println("Bitte beachten sie die richtige Anzahl con Parametern!");
             		System.exit(0);
             	}
             }
