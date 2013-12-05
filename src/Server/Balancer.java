@@ -81,8 +81,8 @@ public class Balancer implements Main{
                 server = LocateRegistry.createRegistry(serverport);
                 o.println("Registry erstellt!");
                 o.println("Balancer algoritmus wird geladen....");
-                Calculator ci = new CalculatorBalancer(server,0);
-                Calculator stup = (Calculator) UnicastRemoteObject.exportObject(ci,bindport);
+                b = new CalculatorBalancer(server,0);
+                Calculator stup = (Calculator) UnicastRemoteObject.exportObject(b,bindport);
                 o.println("Balancer algoritmus wurde geladen!");
                 o.println("Service wird angeboten.....");
                 reg.rebind(name, stup);

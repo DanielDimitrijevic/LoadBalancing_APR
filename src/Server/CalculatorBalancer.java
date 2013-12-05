@@ -35,21 +35,21 @@ public class CalculatorBalancer implements Calculator{
     public synchronized String pi(int iterations, Long id) throws RemoteException {
     	try {
         	ArrayList<String> ar = new ArrayList<String>(Arrays.asList(server.list()));
-        	String re = id + " Error";
-        	if(id > 100 && (this.clientserver.containsKey(id) && this.clienttime.containsKey(id))){
+        	String re = id + " Error kein Server gefunden";
+        	if((this.clientserver.containsKey(id) && this.clienttime.containsKey(id))){
         		long past = this.clienttime.get(id);
         		long current = System.currentTimeMillis();
         		if(current -past >= timer){
         			this.clienttime.remove(id);
         			this.clientserver.remove(id);
-        			this.selBalancer(iterations, 0);
+        			re = this.selBalancer(iterations, 0);
         		}else{
         			Calculator c = (Calculator)server.lookup (ar.get(this.clientserver.get(id)));
         			re = c.pi(iterations, id);
         		}
     		}else{
     			re =this.selBalancer(iterations, id);
-    			this.clienttime.put(id, System.currentTimeMillis());
+    			//this.clienttime.put(id, System.currentTimeMillis());
     		}
         	return re;
     	} catch (NotBoundException e) {
@@ -125,7 +125,7 @@ public class CalculatorBalancer implements Calculator{
     public int getlc(){
     	int min=0;
     	for(int i = 0; i < lc.size();i++){
-    		if(lc.get(i) < lc.get(min)){
+    		if((lc.get(i) < lc.get(min)) && this.last != i){
     			min = i;
     		}
     	}
@@ -162,7 +162,7 @@ public class CalculatorBalancer implements Calculator{
     public int getrt(){
     	int min=0;
     	for(int i = 0; i < rt.size();i++){
-    		if(rt.get(i) < rt.get(min)){
+    		if((rt.get(i) < rt.get(min))&& this.last != i){
     			min = i;
     		}
     	}
