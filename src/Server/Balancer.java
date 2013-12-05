@@ -7,9 +7,13 @@ import Impl.Calculator;
 import java.io.PrintStream;
 import java.net.MalformedURLException;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
+=======
+import java.rmi.Naming;
+>>>>>>> parent of fcf0fd2... Server-Balancer
 =======
 import java.rmi.Naming;
 >>>>>>> parent of fcf0fd2... Server-Balancer
@@ -23,6 +27,7 @@ public class Balancer {
 	private CalculatorBalancer b;
 	private PrintStream o;
 	private Thread t;
+<<<<<<< HEAD
 <<<<<<< HEAD
 	private Registry server, reg;
 	private ArrayList<CalculatorImpl> localserver;
@@ -113,6 +118,34 @@ public class Balancer {
 	}
 	private Balancer(int regport,int bindport,int serverport, String name) throws RemoteException, MalformedURLException{
 >>>>>>> parent of fcf0fd2... Server-Balancer
+=======
+	
+	public static void main(String [] args){
+//		UI i = new UI();
+//		Thread t = new Thread(i);
+//		t.start();
+//		try {
+//            PrintStream o = new PrintStream (System.out);
+//            o.println ("Server Balancing startet");
+//            if(System.getSecurityManager() == null)
+//				System.setSecurityManager(new SecurityManager());
+//            
+//            Calculator ci = new CalculatorBalancer(5);
+//            o.println("Servers startet");
+//            Calculator stup = (Calculator) UnicastRemoteObject.exportObject(ci,1234);
+//            Registry reg = LocateRegistry.createRegistry(1099);
+//            
+//            String name = "Calculator";
+//            if (args.length > 0)
+//                name += args[0];
+//            Naming.rebind(name, stup);
+//            o.println("Gebunden!!");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+	}
+	private Balancer(int regport,int bindport,int serverport, String name) throws RemoteException, MalformedURLException{
+>>>>>>> parent of fcf0fd2... Server-Balancer
 		o = new PrintStream (System.out);
 		o.println("Balancer startet....");
 		o.println("Regestry wird erstellt....");
@@ -132,6 +165,7 @@ public class Balancer {
 		reg.rebind(name, stup);
 		o.println("Service wurde gebunden!");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		try {
 			creatsr("1");
 		} catch (AlreadyBoundException e) {
@@ -143,11 +177,14 @@ public class Balancer {
 		}
 =======
 >>>>>>> parent of fcf0fd2... Server-Balancer
+=======
+>>>>>>> parent of fcf0fd2... Server-Balancer
 		o.println("Balancer gestartet!");
 		in = new UI(this);
 		t = new Thread(in);
 		t.start();
 		o.println("Bereit für eingaben!");
+<<<<<<< HEAD
 <<<<<<< HEAD
 		
 	}
@@ -220,5 +257,7 @@ public class Balancer {
 	}
 	public Registry getServer(){
 		return this.server;
+=======
+>>>>>>> parent of fcf0fd2... Server-Balancer
 	}
 }

@@ -6,6 +6,7 @@ import java.rmi.*;
 import java.rmi.server.*;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Server.Main;
 import Server.UI;
 
@@ -29,10 +30,15 @@ public class CalculatorImpl implements Calculator ,Main{
     		t.start();
     	}
 =======
+=======
+>>>>>>> parent of fcf0fd2... Server-Balancer
 public class CalculatorImpl implements Calculator {
     public CalculatorImpl ()
         throws RemoteException
     {
+<<<<<<< HEAD
+>>>>>>> parent of fcf0fd2... Server-Balancer
+=======
 >>>>>>> parent of fcf0fd2... Server-Balancer
     }
 
@@ -52,6 +58,7 @@ public class CalculatorImpl implements Calculator {
           } catch (Exception e) {
           }
         */
+<<<<<<< HEAD
 <<<<<<< HEAD
         return name + " berechnete: " +4*res;
     }
@@ -103,6 +110,9 @@ public class CalculatorImpl implements Calculator {
 					System.exit(0);
 				}
 		}
+=======
+        return "" +4*res;
+>>>>>>> parent of fcf0fd2... Server-Balancer
 =======
         return "" +4*res;
 >>>>>>> parent of fcf0fd2... Server-Balancer
