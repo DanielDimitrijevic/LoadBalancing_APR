@@ -1,10 +1,11 @@
 package Impl;
 
+import java.lang.*;
+import java.io.*;
 import java.rmi.*;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.rmi.server.*;
 
+<<<<<<< HEAD
 import Server.Main;
 import Server.UI;
 
@@ -27,7 +28,14 @@ public class CalculatorImpl implements Calculator ,Main{
     		Thread t = new Thread(in);
     		t.start();
     	}
+=======
+public class CalculatorImpl implements Calculator {
+    public CalculatorImpl ()
+        throws RemoteException
+    {
+>>>>>>> parent of fcf0fd2... Server-Balancer
     }
+
     public String pi (int iterations)
         throws RemoteException
     {
@@ -44,6 +52,7 @@ public class CalculatorImpl implements Calculator ,Main{
           } catch (Exception e) {
           }
         */
+<<<<<<< HEAD
         return name + " berechnete: " +4*res;
     }
     public static void main(String[] args){
@@ -94,30 +103,8 @@ public class CalculatorImpl implements Calculator ,Main{
 					System.exit(0);
 				}
 		}
+=======
+        return "" +4*res;
+>>>>>>> parent of fcf0fd2... Server-Balancer
     }
-	public void handleinput(String inp) throws AccessException, RemoteException {
-		String [] ar = inp.split(" ");
-		if(ar[0].equals("help") || ar[0].equals("?")){
-			this.outhelp();
-		}else if(ar[0].equals("stop")){
-			this.stop();
-		}
-		else{
-			System.out.println("Befehl nicht vorhanden");
-		}		
-	}
-	public void outhelp(){
-		System.out.println("Befehle:");
-		System.out.println("help | ?			Listet alle verfügbaren befehle auf");
-		System.out.println("stop 				Beendet das Programm");
-	}
-	public void stop() throws AccessException, RemoteException{
-		try {
-			reg.unbind(this.name);
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.exit(0)
-;	}
-}
+};

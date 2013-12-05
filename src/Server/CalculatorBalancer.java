@@ -1,35 +1,30 @@
 package Server;
 
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.Registry;
+import java.util.ArrayList;
 
 import Impl.*;
 
 public class CalculatorBalancer implements Calculator{
-	Registry server;
-	private int last;
-	public CalculatorBalancer(Registry server) throws RemoteException{
-		this.server = server;
+	ArrayList<CalculatorImpl> server;
+	private int last, anz;
+	public CalculatorBalancer(int anz) throws RemoteException{
+		this.anz = anz;
+		server = new ArrayList<CalculatorImpl>();
+		for(int i=0; i < this.anz;i++){
+			server.add(new CalculatorImpl());
+		}
 		last = 0;
 	}
 
 	@Override
 	public synchronized String pi(int iterations) throws RemoteException {
-		if(this.last < this.server.list().length-1)
+		String re = "Server "+ this.last + ": " + server.get(last).pi(iterations);
+		if(this.last < this.server.size()-1)
 			last ++;
 		else
 			last = 0;
-		Calculator c = null;
-		try {
-			c = (Calculator)server.lookup (server.list()[this.last-1]);
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-		}
-		String re = "Error konnte pi nicht abrufen";
-		if(c != null)
-			re = c.pi(iterations);
-		
 		return re;
 	}
+
 }
