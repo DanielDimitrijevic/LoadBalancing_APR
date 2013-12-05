@@ -81,7 +81,7 @@ public class Balancer implements Main{
                 server = LocateRegistry.createRegistry(serverport);
                 o.println("Registry erstellt!");
                 o.println("Balancer algoritmus wird geladen....");
-                Calculator ci = new CalculatorBalancer(server);
+                Calculator ci = new CalculatorBalancer(server,0);
                 Calculator stup = (Calculator) UnicastRemoteObject.exportObject(ci,bindport);
                 o.println("Balancer algoritmus wurde geladen!");
                 o.println("Service wird angeboten.....");
@@ -91,7 +91,7 @@ public class Balancer implements Main{
                         creatsr("1");
                 } catch (AlreadyBoundException e) {
                         // TODO Auto-generated catch block
-                        e.printStackTrace();
+                        System.err.println("Bereits in Registry vorhanden");
                 }
                 o.println("Balancer gestartet!");
                 in = new UI(this);
@@ -114,13 +114,32 @@ public class Balancer implements Main{
                                         this.creatsr(ar[1]);
                                 } catch (AlreadyBoundException e) {
                                         // TODO Auto-generated catch block
-                                        e.printStackTrace();
+                                	System.err.println("Bereits in Registry vorhanden");
                                 }
                         else
                                 o.println("Bitte die anzahl zu erstellenden Server angeben!");
                 }else if(ar[0].equals("stop")){
                         this.stop();
+                }else if(ar[0].equals("setT")){
+                	try{
+                		b.setTimer(Long.parseLong(ar[1]));
+                	}
+                	catch(NumberFormatException e){
+                        o.println("Bitte eine Zahl eingeben!");
                 }
+                }else if(ar[0].equals("setM")){
+                	try{
+                		int m =Integer.parseInt(ar[1]);
+                		if(m != 0 || m != 1 || m!=2){
+                			o.println("Bitte eine richtige Methoden id eingeben!");
+                		}else{
+                			b.setMethode(m);
+                		}
+                	}
+                	catch(NumberFormatException e){
+                        o.println("Bitte eine Zahl eingeben!");
+                }
+                }	
                 else{
                         o.println("Befehl nicht vorhanden");
                 }
@@ -130,6 +149,8 @@ public class Balancer implements Main{
                 o.println("help | ?                                Listet alle verfügbaren befehle auf");
                 o.println("list                                        Listet alle server auf die am loadbalancer verfügbar sind");
                 o.println("create (anzahl)                erstellt neue Server");
+                o.println("setT (zahl)                setzt den SessionTimer ( 60000 = 1 min)");
+                o.println("setM (zahl)                setzt die LB-methode ( 0:Round Robin | 1:Least Connection | 2:Response Time )");
                 o.println("stop                                 Beendet das Programm");
         }
         public void listser() throws AccessException, RemoteException{
@@ -145,7 +166,7 @@ public class Balancer implements Main{
                 try{
                         an = Integer.parseInt(anz);
                         for(int i = 0; i < an; i++){
-                                o.println(i);
+                                //o.println(i);
                                 String s = "Server";
                                 for(int ii = 0; ar.contains(s);ii++)
                                         s = "Server " + ii;

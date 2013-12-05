@@ -17,14 +17,13 @@ public class UI implements Runnable{
         }
         @Override
         public void run() {
-                // TODO Auto-generated method stub
                 while(!interupted){
                         try {
                                 if(b!=null)
                                         this.b.handleinput(console.readLine());
                         } catch (IOException e) {
                                 // Sollte eigentlich nie passieren
-                                e.printStackTrace();
+                        	System.err.println("Fehler bei Eingabe!");
                         }
                 }
         }

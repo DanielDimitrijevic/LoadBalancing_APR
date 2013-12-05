@@ -27,7 +27,7 @@ public class CalculatorImpl implements Calculator ,Main{
                     t.start();
             }
     }
-    public String pi (int iterations)
+    public String pi (int iterations, Long id)
         throws RemoteException
     {
         double res = 0;
@@ -43,7 +43,7 @@ Thread.sleep (iterations*1000);
 } catch (Exception e) {
 }
 */
-        return name + " berechnete: " +4*res;
+        return id.toString() + " " +name + " berechnete pi: " +4*res;
     }
     public static void main(String[] args){
             int regport = 0;
@@ -82,7 +82,7 @@ Thread.sleep (iterations*1000);
                                                 System.setSecurityManager(new SecurityManager());
                                         new CalculatorImpl(regport, bindport, name, host,true);
                                 } catch (Exception e) {
-                                        e.printStackTrace();
+                                	//System.err.println("Bereits in Registry vorhanden");
                         
                                         System.err.println("Das Programm wurde aufgrund eines Verbindungsfehlers beendet");
                                         System.exit(0);
@@ -110,7 +110,7 @@ Thread.sleep (iterations*1000);
                         reg.unbind(this.name);
                 } catch (NotBoundException e) {
                         // TODO Auto-generated catch block
-                        e.printStackTrace();
+                	System.err.println("Nicht in Registry vorhanden");
                 }
                 System.exit(0)
 ;        }
