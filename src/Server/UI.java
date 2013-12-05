@@ -4,12 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import Impl.CalculatorImpl;
+
 public class UI implements Runnable{
 	String zeile = null;
 	BufferedReader console;
 	boolean interupted = false;
-	Balancer b;
-	public UI(Balancer b){
+	Main b;
+	public UI(Main b){
 		this.b = b;
 		console = new BufferedReader(new InputStreamReader(System.in));
 	}
@@ -18,12 +20,12 @@ public class UI implements Runnable{
 		// TODO Auto-generated method stub
 		while(!interupted){
 			try {
-				zeile = console.readLine();
+				if(b!=null)
+					this.b.handleinput(console.readLine());
 			} catch (IOException e) {
 				// Sollte eigentlich nie passieren
 				e.printStackTrace();
 			}
-			System.out.println("Ihre Eingabe war: " + zeile);
 		}
 	}
 	public void stop(){
