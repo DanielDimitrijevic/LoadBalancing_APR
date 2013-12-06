@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.10.18)  6 DEC 2013 11:21
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.5)  6 DEC 2013 11:29
 entering extended mode
 **Backhausen_Dimitrijevic_Loadbalancing.tex
 
-(C:\Users\Dominik\Documents\GitHub\LoadBalancing_APR\Backhausen_Dimitrijevic_Lo
-adbalancing.tex
+(C:\Users\Daniel\Documents\GitHub\LoadBalancing_APR\Backhausen_Dimitrijevic_Loa
+dbalancing.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -481,8 +481,8 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
 )
-(C:\Users\Dominik\Documents\GitHub\LoadBalancing_APR\Backhausen_Dimitrijevic_Lo
-adbalancing.aux)
+(C:\Users\Daniel\Documents\GitHub\LoadBalancing_APR\Backhausen_Dimitrijevic_Loa
+dbalancing.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
 LaTeX Font Info:    ... okay on input line 10.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
@@ -550,8 +550,8 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-(C:\Users\Dominik\Documents\GitHub\LoadBalancing_APR\Backhausen_Dimitrijevic_Lo
-adbalancing.toc)
+(C:\Users\Daniel\Documents\GitHub\LoadBalancing_APR\Backhausen_Dimitrijevic_Loa
+dbalancing.toc)
 \tf@toc=\write3
  [2
 
@@ -561,81 +561,95 @@ Kapitel 1.
 
 ]
 Kapitel 2.
+<./LoadBalancing.png, id=15, 1474.00688pt x 1026.83624pt>
+File: ./LoadBalancing.png Graphic file (type png)
+
+<use ./LoadBalancing.png>
+Package pdftex.def Info: ./LoadBalancing.png used on input line 53.
+(pdftex.def)             Requested size: 582.55247pt x 635.50378pt.
+
+Overfull \hbox (134.42152pt too wide) in paragraph at lines 53--54
+ [][] 
+ []
+
+
+LaTeX Warning: Float too large for page by 28.85382pt on input line 56.
+
 [4
 
-]
+] [5 <C:/Users/Daniel/Documents/GitHub/LoadBalancing_APR/LoadBalancing.png>]
 Kapitel 3.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 54.
+(Font)              <8> on input line 62.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 54.
-[5
+(Font)              <6> on input line 62.
+[6
 
 ]
 Kapitel 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 69--77
+Underfull \hbox (badness 10000) in paragraph at lines 77--85
 \T1/lmr/m/n/12 den.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 69--77
+Underfull \hbox (badness 10000) in paragraph at lines 77--85
 \T1/lmr/m/n/12 möch-te.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 69--77
+Underfull \hbox (badness 10000) in paragraph at lines 77--85
 \T1/lmr/m/n/12 De-fi-ni-tio-nen ha-ben wir Be-feh-le über ein User-In-ter-face 
 be-reit-ge-stellt.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 69--77
+Underfull \hbox (badness 10000) in paragraph at lines 77--85
 \T1/lmr/m/n/12 lan-cer zu be-ein-flus-sen.
  []
 
-[6
+[7
 
 ]
 Kapitel 5.
-[7
+[8
 
 ]
 Kapitel 6.
 
-Overfull \hbox (57.06105pt too wide) in paragraph at lines 84--86
+Overfull \hbox (57.06105pt too wide) in paragraph at lines 92--94
 \T1/lmr/m/n/12 [1] "Prak-ti-sche Ar-beit 2 zur Vor-le-sung 'Ver-teil-te Sys-te-
 me' ETH Zü-rich, SS 2002", Prof.Dr.B.Plattner,
  []
 
 
-Overfull \hbox (187.39854pt too wide) in paragraph at lines 84--86
+Overfull \hbox (187.39854pt too wide) in paragraph at lines 92--94
 \T1/lmr/m/n/12 über-nom-men von Prof.Dr.F.Mattern (http://www.tik.ee.ethz.ch/ti
 k/education/lectures/VS/SS02/Praktikum/aufgabe2.pdf)
  []
 
-[8
+[9
 
 ]
-(C:\Users\Dominik\Documents\GitHub\LoadBalancing_APR\Backhausen_Dimitrijevic_Lo
-adbalancing.aux) ) 
+(C:\Users\Daniel\Documents\GitHub\LoadBalancing_APR\Backhausen_Dimitrijevic_Loa
+dbalancing.aux) ) 
 Here is how much of TeX's memory you used:
- 4527 strings out of 493921
- 63359 string characters out of 3147275
- 153949 words of memory out of 3000000
- 7758 multiletter control sequences out of 15000+200000
+ 4534 strings out of 493921
+ 63485 string characters out of 3147279
+ 153959 words of memory out of 3000000
+ 7763 multiletter control sequences out of 15000+200000
  43286 words of font info for 39 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  45i,14n,47p,501b,357s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:
-/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmssb
-x10.pfb>
-Output written on Backhausen_Dimitrijevic_Loadbalancing.pdf (8 pages, 113226 by
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/
+Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmssbx
+10.pfb>
+Output written on Backhausen_Dimitrijevic_Loadbalancing.pdf (9 pages, 324042 by
 tes).
 PDF statistics:
- 46 PDF objects out of 1000 (max. 8388607)
+ 52 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
