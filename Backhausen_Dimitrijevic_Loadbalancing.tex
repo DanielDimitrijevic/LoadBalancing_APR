@@ -47,6 +47,7 @@
 	
 	Viel Erfolg!
 \chapter{Designüberlegungen}
+Wir haben ein Interface Calculater welches die pi Methode definiert. Nun Implemeniteren wir dies Interface einmal als Server(ClaculatorImpl) und als Balancer somit rufen wir mithilfe von RMI die Pi mehtode von dem Balancer auf welcher sich den Optimalen Server mithilfe der Balancing Methode sucht und die Anfrag somit an diesen Server weiterleitet. Ebenso haben wir ein Main interface welches nur dafür da ist um den User eingaben zu ermöglichen.
 	
 \chapter{Arbeitsaufteilung}
 	\tabulinesep = 4pt
@@ -57,19 +58,27 @@
 		Backhausen & Verbindung erstellen und Grundprogramm schreiben & 4h & 4h\\\tabucline[1pt]{-}
 		Backhausen & Balancing Methoden schreiben & 4h & 4h\\\tabucline[1pt]{-}
 		Backhausen & Balancer schreiben & 2h & 2h\\\tabucline[1pt]{-}
+		Backhausen & User Interface & 2h & 1.5h\\\tabucline[1pt]{-}
 		Dimitrijevic & Balancer schreiben & 2h & 2h\\\tabucline[1pt]{-}
 		Dimitrijevic & Protokoll schreiben & 2h & 2h\\\tabucline[1pt]{-}
 		Dimitrijevic & Verbindgun erstellen und Grundprogramm schreiben& 4h & 4h\\\tabucline[2pt]{-}
-		Gesamt && 14h & 14h\\\tabucline[2pt]{-}
+		Gesamt && 16h & 15.5h\\\tabucline[2pt]{-}
 	\end{tabu}	
 \chapter{Arbeitsdurchführung}
 
 Wir haben damit begonnen uns die uns zur Verfügung gestellten Quellen anzuschauen. Mit Hilfe der Quellen und einem Beispiel aus dem Letzten Jahr haben wir ein Grundprogramm geschrieben um die Verbindung zu testen. Dabei sind wir darauf gekommen das wir die Java Policy nicht überall richtig gesetzt haben was wir auch sofort danach behoben haben.
 Nun haben wir uns überlegt welche Methoden wir implementieren wollen. \linebreak
 Wir sind überein gekommen das wir Least Connection und Response Time nehmen werden.\linebreak
+Nachdem die Festgelegt wurde haben wir dies auch schon in dem Balancer implementiert. Somit haben wir nun 3 Balancing Methoden Round Rpbin, Least Connection und Response Time. Danach haben wir uns überlegt da man vieleicht auch zur Laufzeit bestimte Veränderungen vornhemen will und nicht alles über die Startzeit parameter defiinieren möchte. \linebreak
+Somit haben wir die Startzeitparameter auf ein Minimum reduziert und für alle weiteren Definitionen haben wir Befehle über ein UserInterface bereitgestellt. \linebreak
+Somit habe wirt die möglichkeit implemntiert zur Laufzeit neue virtuelle Server am Balancer zu erstellen. Wir haben ebenfalls implementiert das ein externer Server sich automatisch bei dem Balancer registriert und somit auch in die Serverauswahl kommt.
+Ebenso kann man diese externen Server auch ohne Probleme wieder beenden ohne den LoadBalancer zu beeinflussen.\linebreak
+Wir haben dann ebenso die Session Persistance mit hilfe des Delayed Bindung gelöst und vergeben dem User somit IDs. Hierbei war es allerdings nötig den Standard Client zu erweitern um mit diesen Ids auch umgehen zu können.
 
 
 \chapter{Testbericht}
+Wir haben alle 3 Load Balancing Methoden mit mindestens 6 Servern getestet.
+Da bei der Session Persitance allerdings der Timer standardmäßig auf 5 min gesetzt ist wurde das esten dieer Funktion mit der Zeit sehr Zeitintensive deswegen haben wir eine zusätzliche möglichkeit implementiert um diesen Timer individuel anzupassen um auch diese Funktion ohne große Probleme zu Testen.
 \chapter{Quellen}
 
 [1] "Praktische Arbeit 2 zur Vorlesung 'Verteilte Systeme' ETH Zürich, SS 2002", Prof.Dr.B.Plattner, übernommen von Prof.Dr.F.Mattern (http://www.tik.ee.ethz.ch/tik/education/lectures/VS/SS02/Praktikum/aufgabe2.pdf)

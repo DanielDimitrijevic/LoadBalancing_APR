@@ -1,0 +1,7 @@
+\select@language {ngerman}
+\contentsline {chapter}{\numberline {1}Aufgabenstellung}{3}
+\contentsline {chapter}{\numberline {2}Design\IeC {\"u}berlegungen}{4}
+\contentsline {chapter}{\numberline {3}Arbeitsaufteilung}{5}
+\contentsline {chapter}{\numberline {4}Arbeitsdurchf\IeC {\"u}hrung}{6}
+\contentsline {chapter}{\numberline {5}Testbericht}{7}
+\contentsline {chapter}{\numberline {6}Quellen}{8}
