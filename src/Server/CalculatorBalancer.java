@@ -9,7 +9,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import Impl.*;
-
+/**
+ * Das ist der eigentliche Balancer der in der Methode pi die als Service zu verfügung gestellt ist auf den Optimalen Server weiterleitet
+ * @author Dominik Backhausen
+ *
+ */
 public class CalculatorBalancer implements Calculator {
 	private Registry server;
 	private int last;
@@ -20,7 +24,12 @@ public class CalculatorBalancer implements Calculator {
 	private ArrayList<Integer> lc;
 	private ArrayList<Long> rt;
 	private long timer = 300000;
-
+	/**
+	 * Startet den Balancer
+	 * @param server ServerRegistry
+	 * @param methode methode welche verwendet werden soll
+	 * @throws RemoteException
+	 */
 	public CalculatorBalancer(Registry server, int methode)
 			throws RemoteException {
 		this.server = server;
@@ -63,7 +72,13 @@ public class CalculatorBalancer implements Calculator {
 		}
 		return "ERROR!";
 	}
-
+	/**
+	 * Diese Mthode wählt einen Balancer aus
+	 * @param iterations wert von User
+	 * @param id wert von User
+	 * @return
+	 * @throws RemoteException
+	 */
 	public String selBalancer(int iterations, long id) throws RemoteException {
 		String re = "ERROR!";
 		id = this.lastid;
@@ -82,7 +97,13 @@ public class CalculatorBalancer implements Calculator {
 		}
 		return re;
 	}
-
+	/**
+	 * Diese Mthode beinhaltet das Round Robin verfahren
+	 * @param iterations wert von User
+	 * @param id wert von User
+	 * @return
+	 * @throws RemoteException
+	 */
 	public String balancerr(int iterations, long id) throws RemoteException {
 		if (this.last < this.server.list().length - 1)
 			last++;
@@ -100,7 +121,13 @@ public class CalculatorBalancer implements Calculator {
 			re = c.pi(iterations, id);
 		return re;
 	}
-
+	/**
+	 * Diese Methode beinhaltet das Least Conection Verfahren
+	 * @param iterations wert von User
+	 * @param id wert von User
+	 * @return
+	 * @throws RemoteException
+	 */
 	public String balancelc(int iterations, long id) throws RemoteException {
 		this.checklistlc();
 		int se = getlc();
@@ -119,7 +146,11 @@ public class CalculatorBalancer implements Calculator {
 		this.lc.set(se, this.lc.get(se) - 1);
 		return re;
 	}
-
+	/**
+	 * Diese Mthode hält die Listen Aktuell um die Verfahtren LC am laufen zu halten
+	 * @throws AccessException
+	 * @throws RemoteException
+	 */
 	public void checklistlc() throws AccessException, RemoteException {
 		while (lc.size() < this.server.list().length) {
 			lc.add(0);
@@ -128,7 +159,10 @@ public class CalculatorBalancer implements Calculator {
 			lc.remove(lc.size() - 1);
 		}
 	}
-
+	/**
+	 * Gibt den index des Optimalsten Servers nach LC zurück
+	 * @return
+	 */
 	public int getlc() {
 		int min = 0;
 		for (int i = 0; i < lc.size(); i++) {
@@ -138,7 +172,13 @@ public class CalculatorBalancer implements Calculator {
 		}
 		return min;
 	}
-
+	/**
+	 * Diese Methode beinhaltet das Verfahren nach Response Time
+	 * @param iterations wert von User
+	 * @param id wert von User
+	 * @return
+	 * @throws RemoteException
+	 */
 	public String balancert(int iterations, long id) throws RemoteException {
 		long start = System.currentTimeMillis();
 		checklistrt();
@@ -157,7 +197,11 @@ public class CalculatorBalancer implements Calculator {
 		this.rt.set(se, System.currentTimeMillis() - start);
 		return re;
 	}
-
+	/**
+	 * Hät die listen für RT aktuell
+	 * @throws AccessException
+	 * @throws RemoteException
+	 */
 	public void checklistrt() throws AccessException, RemoteException {
 		while (rt.size() < this.server.list().length) {
 			rt.add((long) 0);
@@ -166,7 +210,10 @@ public class CalculatorBalancer implements Calculator {
 			rt.remove(rt.size() - 1);
 		}
 	}
-
+	/**
+	 * Gibt den Serverindex des Optimalsten Servers nach RT zurück
+	 * @return
+	 */
 	public int getrt() {
 		int min = 0;
 		for (int i = 0; i < rt.size(); i++) {
@@ -176,11 +223,17 @@ public class CalculatorBalancer implements Calculator {
 		}
 		return min;
 	}
-
+	/**
+	 * Setzt den Session Timer
+	 * @param ms neuer Timer
+	 */
 	public void setTimer(long ms) {
 		this.timer = ms;
 	}
-
+	/**
+	 * Setzt die zu verwendente LB Methode
+	 * @param m neue Methode
+	 */
 	public void setMethode(int m) {
 		this.methode = m;
 	}

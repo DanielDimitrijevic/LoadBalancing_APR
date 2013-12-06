@@ -12,12 +12,15 @@ import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.*;
-
+/**
+ * Das ClientProgramm was ein Userinterface erstellt und auf befehl des Users pi mit einer eingegebenen genauchichkeit berechnet.
+ * @author Dominik Backhausen
+ */
 public class Client implements Main {
 	private Calculator c;
 	private UI in;
 	private long id;
-
+	
 	public static void main(String[] args) {
 		int regport = 0;
 		String host = "";
@@ -61,7 +64,14 @@ public class Client implements Main {
 		}
 
 	}
-
+	/**
+	 * Konstruktor zum Starten des Programs
+	 * @param name name unter dem Der Service in der Registry eingetragen ist
+	 * @param host IP auf welcher die Registry liegt
+	 * @param regport port auf welchem die Registry leigt
+	 * @throws RemoteException
+	 * @throws NotBoundException
+	 */
 	public Client(String name, String host, int regport)throws RemoteException, NotBoundException {
 		Registry reg = LocateRegistry.getRegistry(host, regport);
 		c = (Calculator) reg.lookup(name);
@@ -94,7 +104,9 @@ public class Client implements Main {
 			System.out.println("Befehl nicht vorhanden");
 		}
 	}
-
+	/**
+	 * Diese Mthode gibt die Hilfe auf
+	 */
 	public void outhelp() {
 		System.out.println("Befehle:");
 		System.out

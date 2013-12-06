@@ -14,7 +14,10 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+/**
+ * Diese Klasse ist ein Kontroller der das Userinterface mit dem Balancer verbindet
+ * @author Dominik Backhausen, Dnaiel Dimitrijevic
+ */
 public class Balancer implements Main {
 	private UI in;
 	private CalculatorBalancer b;
@@ -70,7 +73,15 @@ public class Balancer implements Main {
 			}
 		}
 	}
-
+	/**
+	 * Erstelt UI und Balancer
+	 * @param regport port der Registry
+	 * @param bindport port auf welchm der Oi service gebunden werden soll
+	 * @param serverport port auf wlechen die ServerRegistry liegt
+	 * @param name name des Services
+	 * @throws RemoteException
+	 * @throws MalformedURLException
+	 */
 	private Balancer(int regport, int bindport, int serverport, String name)throws RemoteException, MalformedURLException {
 		this.regport = regport;
 		this.bindport = bindport;
@@ -145,7 +156,9 @@ public class Balancer implements Main {
 			o.println("Befehl nicht vorhanden");
 		}
 	}
-
+	/**
+	 * Gibt die Hilfe zurück
+	 */
 	public void outhelp() {
 		o.println("Befehle:");
 		o.println("help | ?               		Listet alle verfügbaren befehle auf");
@@ -155,14 +168,24 @@ public class Balancer implements Main {
 		o.println("setM (zahl)            		setzt die LB-methode ( 0:Round Robin | 1:Least Connection | 2:Response Time )");
 		o.println("stop               		Beendet das Programm");
 	}
-
+	/**
+	 * Listet die derzeit Verfügbaren Server aus
+	 * @throws AccessException
+	 * @throws RemoteException
+	 */
 	public void listser() throws AccessException, RemoteException {
 		String[] ar = server.list();
 		o.println("Es sind derzeit: " + ar.length + " Server registriert");
 		for (int i = 0; i < ar.length; i++)
 			o.println(ar[i]);
 	}
-
+	/**
+	 * Erstellt neue Virtuelle Server
+	 * @param anz
+	 * @throws AccessException
+	 * @throws RemoteException
+	 * @throws AlreadyBoundException
+	 */
 	public void creatsr(String anz) throws AccessException, RemoteException,
 			AlreadyBoundException {
 		int an = 0;
@@ -184,7 +207,11 @@ public class Balancer implements Main {
 			o.println("Bitte eine Zahl eingeben!");
 		}
 	}
-
+	/**
+	 * Stopt den Valancer
+	 * @throws AccessException
+	 * @throws RemoteException
+	 */
 	public void stop() throws AccessException, RemoteException {
 		in.stop();
 		String[] names = server.list();

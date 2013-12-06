@@ -7,12 +7,25 @@ import java.rmi.server.*;
 
 import Server.Main;
 import Server.UI;
-
+/**
+ * Implementierung des Servers welcher die Pi methode bereitstellt
+ * @author Dominik Baclhausen Daniel Dimitrijevic
+ *
+ */
 public class CalculatorImpl implements Calculator, Main {
 	private String name;
 	private UI in;
 	private Registry reg;
-
+	/**
+	 * Startet den Server
+	 * @param regport port auf dem die Registry leigt
+	 * @param bindport port an dem der Service gebunden werden soll
+	 * @param name name des Serivces 
+	 * @param reghost IP auf welcher die registry leigt
+	 * @param gui gibt an ob ein Userinterface gestartet werden soll oder nicht
+	 * @throws RemoteException
+	 * @throws AlreadyBoundException
+	 */
 	public CalculatorImpl(int regport, int bindport, String name,String reghost, boolean gui) throws RemoteException,AlreadyBoundException {
 		this.name = name;
 		if (System.getSecurityManager() == null)
@@ -28,7 +41,7 @@ public class CalculatorImpl implements Calculator, Main {
 			t.start();
 		}
 	}
-
+	@Override
 	public String pi(int iterations, Long id) throws RemoteException {
 		double res = 0;
 		for (int i = 1; i < iterations; i += 4) {
@@ -84,7 +97,7 @@ public class CalculatorImpl implements Calculator, Main {
 			}
 		}
 	}
-
+	@Override
 	public void handleinput(String inp) throws AccessException, RemoteException {
 		String[] ar = inp.split(" ");
 		if (ar[0].equals("help") || ar[0].equals("?")) {
@@ -95,13 +108,19 @@ public class CalculatorImpl implements Calculator, Main {
 			System.out.println("Befehl nicht vorhanden");
 		}
 	}
-
+	/**
+	 * Gibt die Hilfe zurück
+	 */
 	public void outhelp() {
 		System.out.println("Befehle:");
 		System.out.println("help | ?                        Listet alle verfügbaren befehle auf");
 		System.out.println("stop                                 Beendet das Programm");
 	}
-
+	/**
+	 * Beendet den Server
+	 * @throws AccessException
+	 * @throws RemoteException
+	 */
 	public void stop() throws AccessException, RemoteException {
 		try {
 			reg.unbind(this.name);
