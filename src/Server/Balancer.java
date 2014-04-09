@@ -63,6 +63,7 @@ public class Balancer implements Main {
 			System.out.println("oder");
 			System.out
 					.println("<name> <Registry Port für Service> <Service Port> <Registry Ports für Server>");
+			System.exit(0);
 		} else {
 			try {
 				new Balancer(regport, bindport, serverport, name);

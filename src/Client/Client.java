@@ -12,6 +12,8 @@ import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.*;
+
+import sun.rmi.transport.LiveRef;
 /**
  * Das ClientProgramm was ein Userinterface erstellt und auf befehl des Users pi mit einer eingegebenen genauchichkeit berechnet.
  * @author Dominik Backhausen

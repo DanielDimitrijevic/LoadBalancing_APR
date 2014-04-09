@@ -61,6 +61,7 @@ public class CalculatorBalancer implements Calculator {
 					Calculator c = (Calculator) server.lookup(ar
 							.get(this.clientserver.get(id)));
 					re = c.pi(iterations, id);
+					this.lc.set(this.clientserver.get(id), this.lc.get(this.clientserver.get(id)) + 1);
 				}
 			} else {
 				re = this.selBalancer(iterations, id);
@@ -92,6 +93,7 @@ public class CalculatorBalancer implements Calculator {
 			re = balancelc(iterations, id);
 			break;
 		case 2:
+			showRT();
 			re = balancert(iterations, id);
 			break;
 		}
@@ -143,7 +145,7 @@ public class CalculatorBalancer implements Calculator {
 		String re = "Error konnte pi nicht abrufen";
 		if (c != null)
 			re = c.pi(iterations, id);
-		this.lc.set(se, this.lc.get(se) - 1);
+		//this.lc.set(se, this.lc.get(se) - 1);
 		return re;
 	}
 	/**
@@ -236,5 +238,10 @@ public class CalculatorBalancer implements Calculator {
 	 */
 	public void setMethode(int m) {
 		this.methode = m;
+	}
+	public void showRT(){
+		for(int i = 0; i < rt.size(); i++){
+			System.out.println(rt.get(i));
+		}
 	}
 }
